@@ -115,8 +115,10 @@ def main(_):
     model = CapsNet()
     tf.logging.info(' Graph loaded')
 
-    sv = tf.train.Supervisor(graph=model.graph, logdir=cfg.logdir, save_model_secs=0)
+    #sv = tf.train.Supervisor(graph=model.graph, logdir=cfg.logdir, save_model_secs=0)
 
+    sv = tf.train.MonitoredTrainingSession(graph=model.graph, logdir=cfg.logdir, save_model_secs=0)
+    
     if cfg.is_training:
         tf.logging.info(' Start training...')
         train(model, sv, num_label)
