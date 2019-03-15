@@ -110,27 +110,23 @@ def evaluation(model, supervisor, num_label):
 
 
 def main(_):
-    #tf.logging.info(' Loading Graph...')
-    #num_label = 10
-    #model = CapsNet()
-    #tf.logging.info(' Graph loaded')
+    tf.logging.info(' Loading Graph...')
+    num_label = 10
+    model = CapsNet()
+    tf.logging.info(' Graph loaded')
+    
     #sv = tf.train.Supervisor(graph=model.graph, logdir=cfg.logdir, save_model_secs=0)
     # The above is a deprecated version. Replacing it with MonitoredTraining Session - Sudeep
     
     
-   tf.logging.info(' Loading Graph...')
-   num_label = 10
-   model = CapsNet()
-   tf.logging.info(' Graph loaded')
-    
-   with model.graph.as_default():
-        with tf.train.MonitoredTrainingSession(summary_dir=cfg.logdir, save_summaries_secs=0) as sv:
-            if cfg.is_training:
-                tf.logging.info(' Start training...')
-                train(model, sv, num_label)
-                tf.logging.info('Training done')
-            else:
-                evaluation(model, sv, num_label)
+   #with model.graph.as_default():
+   #    with tf.train.MonitoredTrainingSession(summary_dir=cfg.logdir, save_summaries_secs=0) as sv:
+    if cfg.is_training:
+        tf.logging.info(' Start training...')
+        train(model, sv, num_label)
+        tf.logging.info('Training done')
+    else:
+        evaluation(model, sv, num_label)
 
 if __name__ == "__main__":
     tf.app.run()
