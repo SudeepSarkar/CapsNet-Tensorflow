@@ -115,12 +115,11 @@ def main(_):
     model = CapsNet()
     tf.logging.info(' Graph loaded')
     
-    #sv = tf.train.Supervisor(graph=model.graph, logdir=cfg.logdir, save_model_secs=0)
+    sv = tf.train.Supervisor(graph=model.graph, logdir=cfg.logdir, save_model_secs=0)
     # The above is a deprecated version. Replacing it with MonitoredTraining Session - Sudeep
-    
-    
    #with model.graph.as_default():
    #    with tf.train.MonitoredTrainingSession(summary_dir=cfg.logdir, save_summaries_secs=0) as sv:
+    
     if cfg.is_training:
         tf.logging.info(' Start training...')
         train(model, sv, num_label)
